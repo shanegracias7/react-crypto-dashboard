@@ -11,7 +11,8 @@ export class AppProvider extends Component {
             firstVisit:false,
             ...this.savedSettings(),
             setPage : this.setPage,
-            confirmFavorites:this.confirmFavorites
+            confirmFavorites:this.confirmFavorites,
+            coinList:null
         }
     }
     componentDidMount = () =>{
@@ -19,8 +20,9 @@ export class AppProvider extends Component {
     }
 
     fetchCoins = async ()=>{
-        let coinList = (await cc.coinList().Data);
-        this.setState({coinList})
+        let coinList = (await cc.coinList());
+        this.setState({coinList:coinList.Data})
+        console.log(coinList.Data)
     }
     confirmFavorites=()=>{
         this.setState({
