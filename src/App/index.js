@@ -1,5 +1,6 @@
 import './App.css';
-import WelcomeMessage from './WelcomeMessage';
+import React from 'react';
+import Settings from '../Settings';
 import styled,{css} from 'styled-components';
 import AppLayout from './AppLayout';
 import AppBar from './AppBar';
@@ -11,7 +12,7 @@ function App() {
     <AppLayout>
       <AppProvider>
         <AppBar/>
-        <WelcomeMessage/>  
+        <Settings/>  
       </AppProvider>
     </AppLayout>
     
