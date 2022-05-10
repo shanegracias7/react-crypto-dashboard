@@ -1,11 +1,18 @@
 import React from 'react'
 import styled,{css} from 'styled-components';
 import AppProvider, { AppContext } from '../App/AppProvider';
+import {fontSize1,greenBoxShadow,color3} from '../Shared/Styles'
 
 const ConfirmButtonStyled = styled.div`
     margin: 20px;
-    color: blue;
+    color: ${color3};
+    ${fontSize1}
+    padding: 5px;
     cursor: pointer;
+    &:hover {
+        ${greenBoxShadow}
+        
+    }
 `
 const CenterDiv = styled.div`
     display:grid;
