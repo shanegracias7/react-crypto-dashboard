@@ -17,13 +17,14 @@ export class AppProvider extends Component {
             confirmFavorites:this.confirmFavorites,
             coinList:null,
             addCoin:this.addCoin,
-            removeCoin:this.removeCoin
+            removeCoin:this.removeCoin,
+            isInFavorites:this.isInFavorites
         }
     }
     componentDidMount = () =>{
         this.fetchCoins();
     }
-
+    isInFavorites =key => _.includes(this.state.favorites,key)
     addCoin = key =>{
         let favorites = [...this.state.favorites]
         if(favorites.length < MAX_FAVORITES){
