@@ -5,8 +5,9 @@ import CoinTile from './CoinTile';
 
 const CoinGridStyle = styled.div`
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
     grid-gap: 15px
+    padding-bottom:30px;
 
 `
 function getCoinsToDisplay(coinList,topSection,favorites){
