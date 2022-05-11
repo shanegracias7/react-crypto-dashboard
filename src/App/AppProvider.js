@@ -47,7 +47,7 @@ export class AppProvider extends Component {
             page:'dashboard',
             firstVisit:false
         })
-        localStorage.setItem('cryptoDash',JSON.stringify({test:'helllo'}))
+        localStorage.setItem('cryptoDash',JSON.stringify({favorites:this.state.favorites}))
     }
 
     savedSettings(){
@@ -58,7 +58,8 @@ export class AppProvider extends Component {
                 firstVisit:true
             }
         }
-        return {}
+        let {favorites} = cryptoDashData
+        return {favorites}
         
         
     }
