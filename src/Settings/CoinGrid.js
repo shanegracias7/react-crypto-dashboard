@@ -11,7 +11,7 @@ const CoinGridStyle = styled.div`
 
 `
 function getCoinsToDisplay(coinList,topSection,favorites){
-    return topSection ? favorites :Object.keys(coinList).slice(0,100);
+    return topSection ? favorites :Object.keys(coinList).slice(0,99);
 }
 export default function ({topSection}){
     return (
