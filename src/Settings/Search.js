@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { backgroundColor2, fontSize2 } from '../Shared/Styles'
 import { AppContext } from '../App/AppProvider'
-import _ from 'lodash';
+import _, { result } from 'lodash';
+import fuzzy from 'fuzzy' 
 
 const SearchGrid = styled.div`
     display:grid;
@@ -19,13 +20,32 @@ const SearchInput = styled.input`
 `
 function filterCoins(e,setFilteredCoin,coinList){
     let inputValue = e.target.value;
+    if (!inputValue){
+        setFilteredCoin(null)
+        return;
+    }
     handleFilter(inputValue,coinList,setFilteredCoin)
 
 }
 
 const handleFilter = _.debounce((inputValue,coinList,setFilteredCoin)=>{
-                        console.log(inputValue)
-                    },500);
+                        //get all coin symbol
+                        let coinSymbols = Object.keys(coinList)
+                        //get all coins names
+                        let coinNames = coinSymbols.map(sym => coinList[sym].CoinName)
+                        //join to strings
+                        let allStringSearch = coinSymbols.concat(coinNames)
+                        let fuzzyResult = fuzzy
+                                            .filter(inputValue,allStringSearch,{})
+                                            .map(result => result.string)
+                        
+                        let filteredCoin = _.pickBy(coinList,(result,symKey)=>{
+                            let coinName = result.CoinName
+                            return (_.includes(fuzzyResult,symKey))||(_.includes(fuzzyResult,coinName))
+                        })
+                        setFilteredCoin(filteredCoin)          
+
+                    },300);
 export default function Search() {
   return (
       <AppContext.Consumer>
