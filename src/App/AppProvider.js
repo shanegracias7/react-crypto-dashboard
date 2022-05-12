@@ -18,12 +18,14 @@ export class AppProvider extends Component {
             coinList:null,
             addCoin:this.addCoin,
             removeCoin:this.removeCoin,
-            isInFavorites:this.isInFavorites
+            isInFavorites:this.isInFavorites,
+            setFilteredCoin:this.setFilteredCoin
         }
     }
     componentDidMount = () =>{
         this.fetchCoins();
     }
+    setFilteredCoin = filteredCoin => this.setState({filteredCoin})
     isInFavorites =key => _.includes(this.state.favorites,key)
     addCoin = key =>{
         let favorites = [...this.state.favorites]
