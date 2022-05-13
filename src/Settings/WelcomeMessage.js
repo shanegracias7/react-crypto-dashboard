@@ -1,5 +1,5 @@
 import React from 'react'
-import AppProvider, { AppContext } from '../App/AppProvider';
+import { AppContext } from '../App/AppProvider';
 
 export default function WelcomeMessage() {
   return (

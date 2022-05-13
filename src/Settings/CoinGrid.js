@@ -1,5 +1,5 @@
 import React from 'react'
-import styled,{css} from 'styled-components';
+import styled from 'styled-components';
 import { AppContext } from '../App/AppProvider';
 import CoinTile from './CoinTile';
 
@@ -23,7 +23,7 @@ export default function ({topSection}){
             {({coinList,favorites,filteredCoin})=>(
                 <CoinGridStyle>
                     {getCoinsToDisplay(coinList,topSection,favorites,filteredCoin).map(coinKey=>
-                        <CoinTile coinKey={coinKey} topSection={topSection} />
+                        <CoinTile key={coinKey} coinKey={coinKey} topSection={topSection} />
                     )}
                 </CoinGridStyle>
             )}
