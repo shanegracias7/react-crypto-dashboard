@@ -11,7 +11,7 @@ export class AppProvider extends Component {
         this.state = {
             page:'dashboard',
             firstVisit:false,
-            favorites:['BTC'],
+            favorites:['BTC','ETH','MATIC','DOGE','USDT'],
             ...this.savedSettings(),
             setPage : this.setPage,
             confirmFavorites:this.confirmFavorites,
