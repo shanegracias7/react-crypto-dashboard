@@ -19,12 +19,17 @@ export class AppProvider extends Component {
             addCoin:this.addCoin,
             removeCoin:this.removeCoin,
             isInFavorites:this.isInFavorites,
-            setFilteredCoin:this.setFilteredCoin
+            setFilteredCoin:this.setFilteredCoin,
+            setCurrentFavorite:this.setCurrentFavorite
         }
     }
     componentDidMount = () =>{
         this.fetchCoins();
         this.fetchPrices();
+    }
+    setCurrentFavorite = sym => {
+        this.setState({currentFavorite:sym})
+        localStorage.setItem('cryptoDash',JSON.stringify({...JSON.parse(localStorage.getItem('cryptoDash')),currentFavorite:sym}))
     }
     setFilteredCoin = filteredCoin => this.setState({filteredCoin})
     isInFavorites =key => _.includes(this.state.favorites,key)
@@ -66,11 +71,13 @@ export class AppProvider extends Component {
         return returnData;
     }
     confirmFavorites=()=>{
+        let currentFavorite = this.state.favorites[0]
         this.setState({
             page:'dashboard',
-            firstVisit:false
+            firstVisit:false,
+            currentFavorite
         },()=>{this.fetchPrices()})
-        localStorage.setItem('cryptoDash',JSON.stringify({favorites:this.state.favorites}))
+        localStorage.setItem('cryptoDash',JSON.stringify({favorites:this.state.favorites,currentFavorite}))
     }
 
     
@@ -82,8 +89,8 @@ export class AppProvider extends Component {
                 firstVisit:true
             }
         }
-        let {favorites} = cryptoDashData
-        return {favorites}
+        let {favorites,currentFavorite} = cryptoDashData
+        return {favorites,currentFavorite}
         
         
     }
