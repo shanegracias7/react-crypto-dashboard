@@ -34,7 +34,7 @@ function ChangePercentage ({data}){
     return(
         <JustifyRight>
             <PercentageChange red={data.CHANGEPCT24HOUR<0}>
-                {numberFormat(data.CHANGEPCT24HOUR)}
+                {numberFormat(data.CHANGEPCT24HOUR)}%
             </PercentageChange>  
         </JustifyRight>
     )
@@ -47,7 +47,7 @@ function PriceTile({sym,data,currentFavorite,setCurrentFavorite}){
                 <div>{sym} </div>
                 <ChangePercentage data={data}/>
             </CoinHeaderGridStyled>
-            <TickerPrice>{numberFormat(data.PRICE)}</TickerPrice>
+            <TickerPrice>${numberFormat(data.PRICE)}</TickerPrice>
         </PriceTileStyled>
     )
 }
