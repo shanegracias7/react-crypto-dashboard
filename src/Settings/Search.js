@@ -18,17 +18,17 @@ const SearchInput = styled.input`
   color: #1163c9;
   place-self: center left; 
 `
-function filterCoins(e,setFilteredCoin,coinList){
+function filterCoins(e,setFilteredCoins,coinList){
     let inputValue = e.target.value;
     if (!inputValue){
-        setFilteredCoin(null)
+        setFilteredCoins(null)
         return;
     }
-    handleFilter(inputValue,coinList,setFilteredCoin)
+    handleFilter(inputValue,coinList,setFilteredCoins)
 
 }
 
-const handleFilter = _.debounce((inputValue,coinList,setFilteredCoin)=>{
+const handleFilter = _.debounce((inputValue,coinList,setFilteredCoins)=>{
                         //get all coin symbol
                         let coinSymbols = Object.keys(coinList)
                         //get all coins names
@@ -43,17 +43,17 @@ const handleFilter = _.debounce((inputValue,coinList,setFilteredCoin)=>{
                             let coinName = result.CoinName
                             return (_.includes(fuzzyResult,symKey))||(_.includes(fuzzyResult,coinName))
                         })
-                        setFilteredCoin(filteredCoin)          
+                        setFilteredCoins(filteredCoin)          
 
                     },300);
 export default function Search() {
   return (
       <AppContext.Consumer>
           {
-              ({setFilteredCoin,coinList})=>(
+              ({setFilteredCoins,coinList})=>(
                     <SearchGrid>
                         <h2>search</h2>
-                        <SearchInput onKeyUp={(e)=>filterCoins(e,setFilteredCoin,coinList)}/>
+                        <SearchInput onKeyUp={(e)=>filterCoins(e,setFilteredCoins,coinList)}/>
                     </SearchGrid>
               )
           }
