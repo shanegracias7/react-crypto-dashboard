@@ -5,6 +5,8 @@ import { Tile } from "../Shared/Tile";
 import { AppContext } from "../App/AppProvider";
 import HighchartsTheme from './HighchartsTheme';
 import ChartSelect from './ChartSelect'
+import Loading from "../Shared/Loading";
+import LoadingChart from "../Shared/LoadingChart";
 
 ReactHighcharts.Highcharts.setOptions(HighchartsTheme);
 
@@ -22,7 +24,8 @@ export default function(){
                             <option value="weeks">Weeks</option>
                             <option value="months">Months</option>
                         </ChartSelect>
-                        {historical ? <ReactHighcharts config={highchartsConfig(historical)} /> : <div>Loading</div>}
+                        {historical ? <ReactHighcharts config={highchartsConfig(historical)} /> : <LoadingChart/>}
+                    
                     </Tile>
                 )
             }

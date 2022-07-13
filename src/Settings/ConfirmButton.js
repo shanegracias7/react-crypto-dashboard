@@ -1,7 +1,9 @@
+import { Button } from '@mui/material';
 import React from 'react'
 import styled from 'styled-components';
 import { AppContext } from '../App/AppProvider';
 import {fontSize1,greenBoxShadow,color3} from '../Shared/Styles'
+import {SendIcon} from '@mui/icons-material';
 
 const ConfirmButtonStyled = styled.div`
     margin: 20px;
@@ -20,18 +22,11 @@ const CenterDiv = styled.div`
 `
 export default function() {
     return (
-        <CenterDiv>
             <AppContext.Consumer>
-                {({confirmFavorites})=>(
-                        <ConfirmButtonStyled
-                            onClick={confirmFavorites}
-                        >
-                            confirm favorites
-                        </ConfirmButtonStyled>
+                {({confirmFavorites})=>(    
+                        <Button size="small" variant="contained"  color="success" sx={{width:'100%'}} onClick={confirmFavorites} >Proceed</Button>
                     )
                 }
-            </AppContext.Consumer>
-        </CenterDiv>
-        
+            </AppContext.Consumer>      
     )
 }

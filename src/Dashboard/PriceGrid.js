@@ -2,6 +2,7 @@ import React from 'react'
 import { AppContext } from '../App/AppProvider'
 import styled from 'styled-components'
 import PriceTile from './PriceTile'
+import { Grid } from '@mui/material'
 
 const PriceGridStyled = styled.div`
     display:grid;
@@ -14,14 +15,27 @@ export default function () {
   return (
     <AppContext.Consumer>
         {
-            ({prices})=>(
-                <PriceGridStyled>
+            ({prices,coinList})=>(
+
+
+
+
+                <Grid container columnSpacing={4}>
                     {
                         prices.map((price,index) => (
-                        <PriceTile price={price} key={index} index={index}/>)
-                        )
+                            
+                            <Grid item xs={3}>
+                                <PriceTile price={price} key={index} index={index} coinList={coinList}/>
+                            </Grid>
+                        ))
                     }
-                </PriceGridStyled>
+                </Grid>
+
+
+
+
+                
+
             )
         }
     </AppContext.Consumer>

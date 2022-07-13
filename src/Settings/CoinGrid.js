@@ -2,6 +2,7 @@ import React from 'react'
 import styled,{css} from 'styled-components';
 import { AppContext } from '../App/AppProvider';
 import CoinTile from './CoinTile';
+import { Grid } from '@mui/material'
 
 const CoinGridStyle = styled.div`
     display: grid;
@@ -10,7 +11,7 @@ const CoinGridStyle = styled.div`
     padding-bottom:30px;
 `
 function getLowerSectionCoin(filteredCoins,coinList){
-    return (filteredCoins && Object.keys(filteredCoins)) || Object.keys(coinList).slice(0,99);
+    return (filteredCoins && Object.keys(filteredCoins).slice(0,24)) || Object.keys(coinList).slice(0,24);
     
 }
 function getCoinsToDisplay(coinList,topSection,favorites,filteredCoins){
@@ -20,11 +21,13 @@ export default function ({topSection}){
     return (
         <AppContext.Consumer>
             {({coinList,favorites,filteredCoins})=>(
-                <CoinGridStyle>
+                <Grid container spacing={4}>
                     {getCoinsToDisplay(coinList,topSection,favorites,filteredCoins).map(coinKey=>
-                        <CoinTile key={coinKey} coinKey={coinKey} topSection={topSection} />
-                    )}
-                </CoinGridStyle>
+                        <Grid item xs={2} key={coinKey}>
+                            <CoinTile key={coinKey} coinKey={coinKey} topSection={topSection} />
+                        </Grid>   
+                    )}           
+                </Grid>
             )}
         </AppContext.Consumer>
     )

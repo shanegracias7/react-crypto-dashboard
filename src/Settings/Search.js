@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { backgroundColor2, fontSize2 } from '../Shared/Styles'
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 import { AppContext } from '../App/AppProvider'
 import _ from 'lodash';
 import fuzzy from 'fuzzy' 
+import { Input } from '@mui/material';
 
 const SearchGrid = styled.div`
     display:grid;
@@ -49,13 +52,20 @@ const handleFilter = _.debounce((inputValue,coinList,setFilteredCoins)=>{
 export default function Search() {
   return (
       <AppContext.Consumer>
-          {
-              ({setFilteredCoins,coinList})=>(
-                    <SearchGrid>
-                        <h2>search</h2>
-                        <SearchInput onKeyUp={(e)=>filterCoins(e,setFilteredCoins,coinList)}/>
-                    </SearchGrid>
-              )
+          {    
+            ({setFilteredCoins,coinList})=>(<>
+            <Input
+                startAdornment={
+                    <InputAdornment position="start">
+                    <SearchIcon/>
+                    </InputAdornment>
+                }
+                onKeyUp={(e)=>filterCoins(e,setFilteredCoins,coinList)}
+                sx={{width: '100%'}}
+                placeholder='search for your favorite coins'
+            />
+            
+            </>)
           }
       </AppContext.Consumer>
     

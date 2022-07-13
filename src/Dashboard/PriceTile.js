@@ -4,6 +4,12 @@ import { SelectableTile } from '../Shared/Tile'
 import { fontSizeBig,greenBoxShadow } from '../Shared/Styles'
 import { CoinHeaderGridStyled } from '../Settings/CoinHeaderGrid'
 import { AppContext } from '../App/AppProvider'
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Avatar, CardHeader } from '@mui/material'
 
 const PriceTileStyled = styled(SelectableTile)`
     ${
@@ -40,19 +46,48 @@ function ChangePercentage ({data}){
     )
 }
 
-function PriceTile({sym,data,currentFavorite,setCurrentFavorite}){
+function PriceTile({sym,data,currentFavorite,setCurrentFavorite,coin}){
     return(
         <PriceTileStyled currentFavorite={currentFavorite} onClick={setCurrentFavorite}>
-            <CoinHeaderGridStyled>
-                <div>{sym} </div>
-                <ChangePercentage data={data}/>
-            </CoinHeaderGridStyled>
-            <TickerPrice>${numberFormat(data.PRICE)}</TickerPrice>
+
+
+
+        <Card sx={{ display: 'flex',mb:1,justifyContent:'space-between'}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                <CoinHeaderGridStyled>
+                    <div>{sym} </div>
+                    <ChangePercentage data={data}/>
+                </CoinHeaderGridStyled>
+                <TickerPrice>${numberFormat(data.PRICE)}</TickerPrice>
+                </CardContent>
+            </Box>
+            <CardMedia
+                component="img"
+                sx={{objectFit: "contain",width:70}}
+                image={`http://cryptocompare.com/${
+                    coin.ImageUrl
+                    }`}
+                alt="Live from space album cover"
+            />
+        </Card>
+
+
+
+
+
+
+
+
+
+
+            
+            
         </PriceTileStyled>
     )
 }
 
-export default function ({price,index}) {
+export default function ({price,index,coinList}) {
     let sym = Object.keys(price)[0]
     let data = price[sym]['USD']
     return (
@@ -63,6 +98,7 @@ export default function ({price,index}) {
                         sym={sym} 
                         data={data} 
                         currentFavorite={currentFavorite === sym}
+                        coin = {coinList[sym]}
                         setCurrentFavorite={()=>setCurrentFavorite(sym)}
                     />
                 )
@@ -75,3 +111,10 @@ export default function ({price,index}) {
 
     )
 }
+
+
+
+
+
+
+
