@@ -1,7 +1,7 @@
 # react-crypto-dashboard
 > Built a dashboard to view realtime price actions and charts of top Cryptocurrencies using React
 
-##Technologies used
+## Technologies used
 1. React
 2. Styled Componenet
 3. HighCharts
